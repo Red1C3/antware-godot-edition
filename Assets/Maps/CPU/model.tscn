@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Maps/CPU/cpu.material" type="Material" id=1]
+[ext_resource path="res://Assets/Maps/CPU/DefaultMaterial.material" type="Material" id=1]
 [ext_resource path="res://Assets/Maps/CPU/model.dae" type="PackedScene" id=2]
 
 [node name="model" instance=ExtResource( 2 )]
