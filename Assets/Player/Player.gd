@@ -11,6 +11,7 @@ var velocity=Vector3.ZERO
 func _ready():
 	set_vars()
 	anim_player.play("idle")
+	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -32,6 +33,9 @@ func _physics_process(delta):
 		
 	velocity=move_and_slide(velocity,Vector3.UP)
 
+func _input(event):
+	if event.is_action("quit"):
+		get_tree().quit(0) #TODO switch to return to menu/pause
 func set_vars():
 	var children=get_children()
 	for child in children:
