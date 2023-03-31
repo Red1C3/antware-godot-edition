@@ -34,4 +34,4 @@ navmesh = SubResource( 4 )
 environment = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08247, 0 )
+transform = Transform( 0.85871, 0, 0.512463, 0, 1, 0, -0.512463, 0, 0.85871, 3.77517, 1.62044, 1.31877 )
