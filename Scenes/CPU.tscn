@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Maps/CPU/model.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Maps/CPU/cpu-shape.tres" type="Shape" id=2]
+[ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=3]
 
 [sub_resource type="NavigationMesh" id=4]
 vertices = PoolVector3Array( -0.132062, 1.28467, -11.6192, -11.6321, 1.03467, -11.6192, -11.6321, 1.28467, -0.119159, -0.132062, 1.28467, 11.6308, 11.6179, 1.03467, 11.6308, 11.6179, 1.28467, -0.119159, -11.6321, 1.28467, -0.119159, -11.6321, 1.03467, 11.6308, -0.132062, 1.28467, 11.6308, 11.6179, 1.28467, -0.119159, 11.6179, 1.03467, -11.6192, -0.132062, 1.28467, -11.6192 )
@@ -10,11 +11,8 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 5 ), PoolIntArray( 2, 
 [sub_resource type="Environment" id=1]
 background_mode = 1
 ambient_light_color = Color( 0.156863, 0.156863, 0.156863, 1 )
+ambient_light_energy = 16.0
 adjustment_enabled = true
-
-[sub_resource type="SphereShape" id=2]
-
-[sub_resource type="SphereMesh" id=3]
 
 [node name="Root" type="Spatial"]
 
@@ -35,14 +33,5 @@ navmesh = SubResource( 4 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="RigidBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70418, 3.11088, 0.862202 )
-
-[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
-shape = SubResource( 2 )
-
-[node name="MeshInstance" type="MeshInstance" parent="RigidBody/CollisionShape"]
-mesh = SubResource( 3 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.06962, 8.97858 )
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08247, 0 )
