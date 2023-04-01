@@ -14,18 +14,20 @@ var ray_cast:RayCast
 
 var detection_area:Area
 
-var is_chasing=false
+enum State{idle,chase}
+
+var state=State.idle
 
 func _ready():
 	set_vars()
 	
 func _process(delta):
-	if not is_chasing:
+	if state==State.idle:
 		if detection_area.overlaps_body(player) and cast_ray_to_player():
-			is_chasing=true
+			state=State.chase
 
 func _physics_process(delta):
-	if is_chasing:
+	if state==State.chase:
 		transform=transform.looking_at(player.global_translation,Vector3.UP)
 		agent.set_target_location(player.global_translation)
 		var position=to_global(Vector3.ZERO)
@@ -59,10 +61,10 @@ func cast_ray_to_player():
 func _on_DetectionArea_body_entered(body):
 	if body is KinematicBody:
 		if body.name==PLAYER_NAME and cast_ray_to_player():
-			is_chasing=true
+			state=State.chase
 
 
 func _on_DetectionArea_body_exited(body):
 	if body is KinematicBody:
 		if body.name==PLAYER_NAME:
-			is_chasing=false
+			state=State.idle
