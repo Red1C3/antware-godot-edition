@@ -13,6 +13,8 @@ var anim_player:AnimationPlayer
 
 var armature:Spatial
 
+var collision_shape:CollisionShape
+
 var gravity=ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var velocity=Vector3.ZERO
@@ -60,10 +62,11 @@ func _input(event):
 		armature.rotate_object_local(Vector3(1, 0, 0), cam_rot_y)
 		
 func set_vars():
-	var children=get_children()
-	for child in children:
+	for child in get_children():
 		if child is AnimationPlayer:
 			anim_player=child
 		if child.name == ARMATURE_NAME:
 			armature=child
 			armature_default_basis=armature.transform.basis
+		if child is CollisionShape:
+			collision_shape=child
