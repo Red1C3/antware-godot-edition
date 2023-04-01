@@ -43,3 +43,6 @@ transform = Transform( 0.85871, 0, 0.512463, 0, 1, 0, -0.512463, 0, 0.85871, 3.7
 
 [node name="Ant" parent="Actors/Ants" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 7 )
+
+[node name="Ant2" parent="Actors/Ants" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.94215, 1, 7 )
