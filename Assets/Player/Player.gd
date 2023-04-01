@@ -2,11 +2,25 @@ extends KinematicBody
 
 const SPEED=10
 
+const ARMATURE_NAME="Armature"
+
+const MOUSE_CLAMP_MIN=deg2rad(-60)
+const MOUSE_CLAMP_MAX=deg2rad(60)
+
+var mouse_sensetivity=0.1 #TODO make it an option
+
 var anim_player:AnimationPlayer
+
+var armature:Spatial
 
 var gravity=ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var velocity=Vector3.ZERO
+
+var armature_default_basis:Basis
+
+var cam_rot_x=0
+var cam_rot_y=0
 
 func _ready():
 	set_vars()
@@ -20,15 +34,14 @@ func _physics_process(delta):
 		
 		var direction=Vector3.ZERO
 		if Input.is_action_pressed("player_fwd"):
-			direction+=Vector3.FORWARD
+			direction+=armature.transform.basis.y
 		if Input.is_action_pressed("player_bck"):
-			direction+=Vector3.BACK
+			direction-=armature.transform.basis.y
 		if Input.is_action_pressed("player_left"):
-			direction+=Vector3.LEFT
+			direction+=armature.transform.basis.x
 		if Input.is_action_pressed("player_right"):
-			direction+=Vector3.RIGHT
+			direction-=armature.transform.basis.x
 		direction=to_global(direction)-transform.origin
-		direction*=-1
 		velocity=direction.normalized()*SPEED
 		
 	velocity=move_and_slide(velocity,Vector3.UP)
@@ -36,8 +49,21 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action("quit"):
 		get_tree().quit(0) #TODO switch to return to menu/pause
+		
+	if event is InputEventMouseMotion:
+		var mouse_pos=event.get_relative() * mouse_sensetivity
+		cam_rot_x-=mouse_pos.x*mouse_sensetivity
+		cam_rot_y+=mouse_pos.y*mouse_sensetivity
+		cam_rot_y=clamp(cam_rot_y,MOUSE_CLAMP_MIN,MOUSE_CLAMP_MAX)
+		armature.transform.basis=armature_default_basis
+		armature.rotate_object_local(Vector3(0,0,-1), cam_rot_x)
+		armature.rotate_object_local(Vector3(1, 0, 0), cam_rot_y)
+		
 func set_vars():
 	var children=get_children()
 	for child in children:
 		if child is AnimationPlayer:
 			anim_player=child
+		if child.name == ARMATURE_NAME:
+			armature=child
+			armature_default_basis=armature.transform.basis

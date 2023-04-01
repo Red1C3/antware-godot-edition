@@ -2227,9 +2227,10 @@ height = 0.8
 script = ExtResource( 5 )
 
 [node name="Armature" type="Spatial" parent="."]
-transform = Transform( 0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0 )
+transform = Transform( 0.01, 0, 0, 0, -4.37114e-10, -0.01, 0, 0.01, -4.37114e-10, 0, 1.4, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="Armature"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.5438, 153.046 )
 bones/0/name = "main_j"
 bones/0/parent = -1
 bones/0/rest = Transform( 1, 0, 0, 0, 0, 1, 0, -1, 0, -9.92918, 28.1623, -138.952 )
@@ -2526,6 +2527,9 @@ skin = SubResource( 2 )
 mesh = SubResource( 6 )
 skin = SubResource( 2 )
 
+[node name="Camera" type="Camera" parent="Armature"]
+transform = Transform( -100, 0, -8.74228e-06, 8.74228e-06, 1.36424e-12, -100, 1.35525e-19, -100, -1.36424e-12, 0, 0, 0 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/draw = SubResource( 7 )
 anims/hide = SubResource( 8 )
@@ -2537,6 +2541,5 @@ anims/shoot = SubResource( 11 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.899285, 0 )
 shape = SubResource( 12 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5373, 0.229345 )
-fov = 90.0
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0 )
