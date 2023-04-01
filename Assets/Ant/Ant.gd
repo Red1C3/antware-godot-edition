@@ -12,11 +12,18 @@ var player:KinematicBody
 
 var ray_cast:RayCast
 
+var detection_area:Area
+
 var is_chasing=false
 
 func _ready():
 	set_vars()
 	
+func _process(delta):
+	if not is_chasing:
+		if detection_area.overlaps_body(player) and cast_ray_to_player():
+			is_chasing=true
+
 func _physics_process(delta):
 	if is_chasing:
 		transform=transform.looking_at(player.global_translation,Vector3.UP)
@@ -28,7 +35,6 @@ func _physics_process(delta):
 
 	
 func set_vars():
-	var detection_area
 	for child in get_children():
 		if child is NavigationAgent:
 			agent=child
