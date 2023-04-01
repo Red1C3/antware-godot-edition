@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Maps/CPU/model.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Maps/CPU/cpu-shape.tres" type="Shape" id=2]
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Ant/Ant.tscn" type="PackedScene" id=4]
 
 [sub_resource type="NavigationMesh" id=4]
 vertices = PoolVector3Array( -0.132062, 1.28467, -11.6192, -11.6321, 1.03467, -11.6192, -11.6321, 1.28467, -0.119159, -0.132062, 1.28467, 11.6308, 11.6179, 1.03467, 11.6308, 11.6179, 1.28467, -0.119159, -11.6321, 1.28467, -0.119159, -11.6321, 1.03467, 11.6308, -0.132062, 1.28467, 11.6308, 11.6179, 1.28467, -0.119159, 11.6179, 1.03467, -11.6192, -0.132062, 1.28467, -11.6192 )
@@ -33,5 +34,12 @@ navmesh = SubResource( 4 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
+[node name="Actors" type="Spatial" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource( 3 )]
 transform = Transform( 0.85871, 0, 0.512463, 0, 1, 0, -0.512463, 0, 0.85871, 3.77517, 1.62044, 1.31877 )
+
+[node name="Ants" type="Spatial" parent="Actors"]
+
+[node name="Ant" parent="Actors/Ants" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 7 )
