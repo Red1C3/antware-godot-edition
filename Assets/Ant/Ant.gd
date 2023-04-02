@@ -1,14 +1,17 @@
 extends KinematicBody
-enum State{idle,chase}
+enum State{idle,chase,attack}
 
 const SPEED=1
 const ANT_SCOPE=deg2rad(60)
 const CHASE_DAM=10
+const ATTACK_DAM=40
 const PLAYER_NAME="Player"
 const ARMATURE_NAME="Armature"
 const BITE_ATTACHMENT_NAME="BiteAttachment"
 const ANIM_PLAYER_IDLE_SPEED=1
+const ANIM_PLAYER_ATK_SPEED=1
 const ANIM_PLAYER_WALK_SPEED_FACTOR=1
+const TARGET_DIS=4.7
 
 var agent:NavigationAgent
 var player:KinematicBody
@@ -27,6 +30,8 @@ func _process(delta):
 	if self.state==State.idle:
 		if detection_area.overlaps_body(player) and cast_ray_to_player():
 			self.state=State.chase
+	if to_global(Vector3.ZERO).distance_to(player.global_translation)<=TARGET_DIS:
+		self.state=State.attack
 
 func _physics_process(delta):
 	if self.state==State.chase:
@@ -45,6 +50,8 @@ func damage_player():
 		match self.state:
 			State.chase:
 				player.deal_damage(CHASE_DAM)
+			State.attack:
+				player.deal_damage(ATTACK_DAM)
 	
 func set_vars():
 	var armature
@@ -94,4 +101,7 @@ func set_state(new_state):
 			anim_player.play("idle")
 		State.chase:
 			anim_player.play("walk")
+		State.attack:
+			anim_player.playback_speed=ANIM_PLAYER_ATK_SPEED
+			anim_player.play("attack")
 	state=new_state

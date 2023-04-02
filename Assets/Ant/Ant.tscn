@@ -1010,11 +1010,14 @@ tracks/54/loop_wrap = true
 tracks/54/imported = false
 tracks/54/enabled = true
 tracks/54/keys = {
-"times": PoolRealArray( 1.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 1.4, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "damage_player"
+}, {
+"args": [ 0 ],
+"method": "set_state"
 } ]
 }
 
@@ -2084,7 +2087,7 @@ bones/53/enabled = true
 bones/53/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 1.01253e-27, 0, -2.52435e-29, -0.070663, 0.9975, 7.52573e-28, -0.9975, -0.070663, -4.1359e-25, 1.0636, 0.537984 )
+transform = Transform( 1, 1.01253e-27, 2.52435e-29, -5.04871e-29, -0.070663, 0.9975, 7.54151e-28, -0.9975, -0.070663, -4.1359e-25, 1.0636, 0.537984 )
 bone_name = "RB"
 
 [node name="body_01_low" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -2208,7 +2211,7 @@ mesh = SubResource( 31 )
 skin = SubResource( 3 )
 
 [node name="BiteAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 1.13666e-21, 2.52316e-21, 3.94449e-21, -0.283286, 0.959037, -3.50961e-22, -0.959037, -0.283286, -0.22264, 1.21148, -4.09355 )
+transform = Transform( 0.999937, 0.0112576, 5.49607e-08, 0.00321132, -0.285244, 0.958451, 0.0107899, -0.95839, -0.285262, -0.22264, 1.20809, -4.09255 )
 bone_name = "Teeth.L"
 
 [node name="Area" type="Area" parent="Armature/Skeleton/BiteAttachment"]
