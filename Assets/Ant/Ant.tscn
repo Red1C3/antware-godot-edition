@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Assets/Ant/ant_material.material" type="Material" id=1]
 [ext_resource path="res://Assets/Ant/Ant.gd" type="Script" id=2]
@@ -619,6 +619,9 @@ surfaces/0 = {
 "vertex_count": 118
 }
 
+[sub_resource type="CapsuleShape" id=37]
+radius = 0.5
+
 [sub_resource type="Animation" id=32]
 resource_name = "attack"
 length = 1.70833
@@ -1000,6 +1003,20 @@ tracks/53/loop_wrap = true
 tracks/53/imported = false
 tracks/53/enabled = true
 tracks/53/keys = PoolRealArray( 0, 1, -0.00099349, 0, -0.00205809, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 0.0666667, 1, -0.00099349, 0, -0.00205809, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 0.133333, 1, -0.00479722, 0, -0.00993615, -3.7749e-08, 1.49012e-08, 3.22704e-15, 1, 1, 1, 1, 0.2, 1, -0.0134511, 0, -0.0278594, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 0.266667, 1, -0.0258937, 0, -0.0536294, -3.7749e-08, 1.49012e-08, 2.33886e-15, 1, 1, 1, 1, 1.06667, 1, -0.241861, 0, -0.500919, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 1.13333, 1, -0.246786, 0, -0.51112, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 1.2, 1, -0.242035, 0, -0.501281, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 1.26667, 1, -0.210741, 0, -0.436467, -3.7749e-08, -1.49012e-08, 1.21385e-15, 1, 1, 1, 1, 1.46667, 1, -0.0479317, 0, -0.0992718, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 1.53333, 1, -0.0106955, 0, -0.0221518, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1, 1.6, 1, 4.76837e-07, 0, -1.19209e-07, -3.7749e-08, -1.49012e-08, 1.21385e-15, 1, 1, 1, 1, 1.70833, 1, 4.76837e-07, 0, -1.19209e-07, -3.7749e-08, -6.70556e-23, 1.77636e-15, 1, 1, 1, 1 )
+tracks/54/type = "method"
+tracks/54/path = NodePath(".")
+tracks/54/interp = 1
+tracks/54/loop_wrap = true
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/keys = {
+"times": PoolRealArray( 1.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "damage_player"
+} ]
+}
 
 [sub_resource type="Animation" id=33]
 resource_name = "idle"
@@ -2067,7 +2084,7 @@ bones/53/enabled = true
 bones/53/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 1.01253e-27, 0, -2.52435e-29, -0.070663, 0.9975, 7.52573e-28, -0.9975, -0.070663, -4.13594e-25, 1.06473, 0.536702 )
+transform = Transform( 1, 1.01253e-27, 0, -2.52435e-29, -0.070663, 0.9975, 7.52573e-28, -0.9975, -0.070663, -4.1359e-25, 1.0636, 0.537984 )
 bone_name = "RB"
 
 [node name="body_01_low" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -2190,6 +2207,17 @@ skin = SubResource( 3 )
 mesh = SubResource( 31 )
 skin = SubResource( 3 )
 
+[node name="BiteAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
+transform = Transform( 1, 1.13666e-21, 2.52316e-21, 3.94449e-21, -0.283286, 0.959037, -3.50961e-22, -0.959037, -0.283286, -0.22264, 1.21148, -4.09355 )
+bone_name = "Teeth.L"
+
+[node name="Area" type="Area" parent="Armature/Skeleton/BiteAttachment"]
+transform = Transform( 1, 1.49012e-08, 0, 0, 1, 0, 0, 2.98023e-08, 1, 0.312949, 0.271331, 0.0483382 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Armature/Skeleton/BiteAttachment/Area"]
+transform = Transform( -4.84288e-08, 0, 1, 1.49012e-08, 1, 0, -0.999999, 0, -5.58794e-08, 0, 0, 0 )
+shape = SubResource( 37 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 32 )
 anims/idle = SubResource( 33 )
@@ -2211,6 +2239,7 @@ shape = SubResource( 36 )
 
 [node name="RayCast" type="RayCast" parent="DetectionArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0341753, 0 )
+visible = false
 cast_to = Vector3( 0, 0, -1 )
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]

@@ -3,7 +3,10 @@ enum State{idle,chase}
 
 const SPEED=1
 const ANT_SCOPE=deg2rad(60)
+const CHASE_DAM=10
 const PLAYER_NAME="Player"
+const ARMATURE_NAME="Armature"
+const BITE_ATTACHMENT_NAME="BiteAttachment"
 const ANIM_PLAYER_IDLE_SPEED=1
 const ANIM_PLAYER_WALK_SPEED_FACTOR=1
 
@@ -12,6 +15,7 @@ var player:KinematicBody
 var ray_cast:RayCast
 var anim_player:AnimationPlayer
 var detection_area:Area
+var damage_area:Area
 var state setget set_state
 
 func _ready():
@@ -32,13 +36,18 @@ func _physics_process(delta):
 		var next=agent.get_next_location()
 		var direction=-position+next
 		var velocity=move_and_slide(direction.normalized()*SPEED,Vector3.UP)
-		anim_player.playback_speed=velocity.length()*ANIM_PLAYER_WALK_SPEED_FACTOR
+		anim_player.playback_speed=velocity.length()*\
+									ANIM_PLAYER_WALK_SPEED_FACTOR
 
 
 func damage_player():
-	pass
+	if damage_area.overlaps_body(player):
+		match self.state:
+			State.chase:
+				player.deal_damage(CHASE_DAM)
 	
 func set_vars():
+	var armature
 	for child in get_children():
 		if child is NavigationAgent:
 			agent=child
@@ -46,9 +55,14 @@ func set_vars():
 			detection_area=child
 		if child is AnimationPlayer:
 			anim_player=child
+		if child.name == ARMATURE_NAME:
+			armature=child
 	for child in detection_area.get_children():
 		if child is RayCast:
 			ray_cast=child
+	for child in armature.get_child(0).get_children():
+		if child.name == BITE_ATTACHMENT_NAME:
+			damage_area=child.get_child(0)
 	player=get_node("/root/Root/Actors/Player")
 
 func cast_ray_to_player():

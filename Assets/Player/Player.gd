@@ -70,3 +70,7 @@ func set_vars():
 			armature_default_basis=armature.transform.basis
 		if child is CollisionShape:
 			collision_shape=child
+
+
+func deal_damage(damage):
+	print(damage)
