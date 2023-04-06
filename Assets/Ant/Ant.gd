@@ -1,3 +1,5 @@
+class_name Ant
+
 extends KinematicBody
 enum State{idle,chase,attack}
 
@@ -12,6 +14,7 @@ const ANIM_PLAYER_IDLE_SPEED=1
 const ANIM_PLAYER_ATK_SPEED=1
 const ANIM_PLAYER_WALK_SPEED_FACTOR=1
 const TARGET_DIS=4.7
+const CLASS_NAME="Ant"
 
 var agent:NavigationAgent
 var player:KinematicBody
@@ -20,6 +23,7 @@ var anim_player:AnimationPlayer
 var detection_area:Area
 var damage_area:Area
 var state setget set_state
+var health=100
 
 func _ready():
 	set_vars()
@@ -105,3 +109,14 @@ func set_state(new_state):
 			anim_player.playback_speed=ANIM_PLAYER_ATK_SPEED
 			anim_player.play("attack")
 	state=new_state
+
+func get_class():
+	return CLASS_NAME
+	
+func deal_damage(amount):
+	health-=amount
+	if health<=0:
+		kill()
+		
+func kill():
+	pass #TODO
