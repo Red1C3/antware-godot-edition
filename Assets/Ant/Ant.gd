@@ -24,6 +24,7 @@ var detection_area:Area
 var damage_area:Area
 var state setget set_state
 var health=100
+var material:SpatialMaterial
 
 func _ready():
 	set_vars()
@@ -74,6 +75,8 @@ func set_vars():
 	for child in armature.get_child(0).get_children():
 		if child.name == BITE_ATTACHMENT_NAME:
 			damage_area=child.get_child(0)
+		if child is MeshInstance and material == null:
+			material=child.get_mesh().surface_get_material(0)
 	player=get_node("/root/Root/Actors/Player")
 
 func cast_ray_to_player():
@@ -117,6 +120,10 @@ func deal_damage(amount):
 	health-=amount
 	if health<=0:
 		kill()
-		
+	set_material_tint(Color.red)
 func kill():
 	pass #TODO
+
+
+func set_material_tint(color:Color):
+	material.albedo_color=color
