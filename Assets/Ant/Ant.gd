@@ -25,6 +25,7 @@ var damage_area:Area
 var state setget set_state
 var health=100
 var material:SpatialMaterial
+var dam_color_timer:Timer
 
 func _ready():
 	set_vars()
@@ -67,6 +68,8 @@ func set_vars():
 			detection_area=child
 		if child is AnimationPlayer:
 			anim_player=child
+		if child is Timer:
+			dam_color_timer=child
 		if child.name == ARMATURE_NAME:
 			armature=child
 	for child in detection_area.get_children():
@@ -76,7 +79,7 @@ func set_vars():
 		if child.name == BITE_ATTACHMENT_NAME:
 			damage_area=child.get_child(0)
 		if child is MeshInstance and material == null:
-			material=child.get_mesh().surface_get_material(0)
+			material=child.get_surface_material(0)
 	player=get_node("/root/Root/Actors/Player")
 
 func cast_ray_to_player():
@@ -121,9 +124,14 @@ func deal_damage(amount):
 	if health<=0:
 		kill()
 	set_material_tint(Color.red)
+	dam_color_timer.start()
 func kill():
 	pass #TODO
 
 
 func set_material_tint(color:Color):
 	material.albedo_color=color
+
+
+func _on_DamColorTimer_timeout():
+	set_material_tint(Color.white)
