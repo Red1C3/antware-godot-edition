@@ -52,8 +52,12 @@ func _input(event):
 	if event.is_action("quit"):
 		get_tree().quit(0) #TODO switch to return to menu/pause
 		
-	if event.is_action_pressed("shoot") and on_mag_bullets>0:
+	if event.is_action_pressed("shoot") and on_mag_bullets>0 \
+										and not anim_player.is_playing():
 		anim_player.play("shoot")
+	
+	if event.is_action_pressed("reload"):
+		anim_player.play("reload")
 		
 	if event is InputEventMouseMotion:
 		var mouse_pos=event.get_relative() * mouse_sensetivity
@@ -95,3 +99,8 @@ func shoot():
 				other.has_method("get_class") and \
 	 			other.get_class() == ANT_CLASS_NAME:
 		other.deal_damage(BULLET_DAM)
+
+func reload():
+	if off_mag_bullets>0:
+		on_mag_bullets=MAG_SIZE
+		off_mag_bullets-=MAG_SIZE

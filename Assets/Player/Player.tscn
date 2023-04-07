@@ -1829,6 +1829,20 @@ tracks/54/loop_wrap = true
 tracks/54/imported = false
 tracks/54/enabled = true
 tracks/54/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 3.63333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
+tracks/55/type = "method"
+tracks/55/path = NodePath(".")
+tracks/55/interp = 1
+tracks/55/loop_wrap = true
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/keys = {
+"times": PoolRealArray( 3.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reload"
+} ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "shoot"
@@ -2542,7 +2556,7 @@ mesh = SubResource( 6 )
 skin = SubResource( 2 )
 
 [node name="MuzzleAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 0, 0, 0, -9.95264e-21, 1, 0, -1, -9.95264e-21, -9.94859, 45.7767, -149.552 )
+transform = Transform( 1, 0, 0, 0, -9.95264e-21, 1, 0, -1, -9.95264e-21, -9.96318, 39.7183, -149.715 )
 bone_name = "Slide_j"
 
 [node name="RayCast" type="RayCast" parent="Armature/Skeleton/MuzzleAttachment"]
