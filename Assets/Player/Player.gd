@@ -1,6 +1,7 @@
 extends KinematicBody
 
 const SPEED=10
+const SPRINT_MULTIPLIER=2
 const STARTING_HEALTH=100
 const ARMATURE_NAME="Armature"
 const ANT_CLASS_NAME="Ant"
@@ -45,6 +46,8 @@ func _physics_process(delta):
 			direction-=armature.transform.basis.x
 		direction=to_global(direction)-transform.origin
 		velocity=direction.normalized()*SPEED
+		if Input.is_action_pressed("run"):
+			velocity=velocity*SPRINT_MULTIPLIER # TODO make footsteps faster
 		
 	velocity=move_and_slide(velocity,Vector3.UP)
 
