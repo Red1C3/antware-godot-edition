@@ -1,7 +1,7 @@
 class_name Ant
 
 extends KinematicBody
-enum State{idle,chase,attack}
+enum State{idle,chase,attack,death}
 
 const SPEED=1
 const ANT_SCOPE=deg2rad(60)
@@ -13,6 +13,7 @@ const BITE_ATTACHMENT_NAME="BiteAttachment"
 const ANIM_PLAYER_IDLE_SPEED=1
 const ANIM_PLAYER_ATK_SPEED=1
 const ANIM_PLAYER_WALK_SPEED_FACTOR=1
+const ANIM_PLAYER_DEATH_SPEED=1
 const TARGET_DIS=4.7
 const CLASS_NAME="Ant"
 
@@ -33,6 +34,8 @@ func _ready():
 	self.state=State.idle
 	
 func _process(delta):
+	if self.state == State.death:
+		return
 	if self.state==State.idle:
 		if detection_area.overlaps_body(player) and cast_ray_to_player():
 			self.state=State.chase
@@ -94,12 +97,16 @@ func cast_ray_to_player():
 		return true
 
 func _on_DetectionArea_body_entered(body):
+	if self.state == State.death:
+		return
 	if body is KinematicBody:
 		if body.name==PLAYER_NAME and cast_ray_to_player():
 			self.state=State.chase
 
 
 func _on_DetectionArea_body_exited(body):
+	if self.state == State.death:
+		return
 	if body is KinematicBody:
 		if body.name==PLAYER_NAME:
 			self.state=State.idle
@@ -114,19 +121,25 @@ func set_state(new_state):
 		State.attack:
 			anim_player.playback_speed=ANIM_PLAYER_ATK_SPEED
 			anim_player.play("attack")
+		State.death:
+			anim_player.playback_speed=ANIM_PLAYER_DEATH_SPEED
+			anim_player.play("death")
 	state=new_state
 
 func get_class():
 	return CLASS_NAME
 	
 func deal_damage(amount):
+	if self.state==State.death:
+		return
 	health-=amount
 	if health<=0:
-		kill()
+		self.state=State.death
+		return
 	set_material_tint(Color.red)
 	dam_color_timer.start()
 func kill():
-	pass #TODO
+	queue_free()
 
 
 func set_material_tint(color:Color):
@@ -134,4 +147,7 @@ func set_material_tint(color:Color):
 
 
 func _on_DamColorTimer_timeout():
+	if self.state == State.death:
+		return
+
 	set_material_tint(Color.white)

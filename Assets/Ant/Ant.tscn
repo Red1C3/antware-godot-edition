@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Assets/Ant/ant_material.material" type="Material" id=1]
 [ext_resource path="res://Assets/Ant/Ant.gd" type="Script" id=2]
@@ -988,6 +988,42 @@ tracks/54/keys = {
 }, {
 "args": [ 0 ],
 "method": "set_state"
+} ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "death"
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Armature")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray( 0, 1, 0, 2.45, 0, 0, 0, 1, -4.37114e-08, 1, 1, 1 )
+tracks/1/type = "value"
+tracks/1/path = NodePath("Armature/Skeleton/body_03_low:material/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.262745, 0.776471, 0, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "kill"
 } ]
 }
 
@@ -2057,7 +2093,7 @@ bones/53/enabled = true
 bones/53/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, -3.48905e-22, -3.74496e-22, 3.48905e-22, -0.070663, 0.9975, -3.74496e-22, -0.9975, -0.070663, 0, 1.0636, 0.537984 )
+transform = Transform( 1, 1.01253e-27, 0, -2.52435e-29, -0.070663, 0.9975, 7.52573e-28, -0.9975, -0.070663, -4.13594e-25, 1.06473, 0.536702 )
 bone_name = "RB"
 
 [node name="body_01_low" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -2211,7 +2247,7 @@ skin = SubResource( 3 )
 material/0 = ExtResource( 1 )
 
 [node name="BiteAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 1.5714e-15, -2.90282e-15, 3.23047e-15, -0.285252, 0.958454, 6.78077e-16, -0.958454, -0.285252, -0.22264, 1.20809, -4.09255 )
+transform = Transform( 1, 1.02181e-21, 2.1282e-21, 3.48131e-21, -0.286187, 0.958175, -3.4273e-22, -0.958175, -0.286187, -0.22264, 1.20766, -4.09337 )
 bone_name = "Teeth.L"
 
 [node name="Area" type="Area" parent="Armature/Skeleton/BiteAttachment"]
@@ -2223,6 +2259,7 @@ shape = SubResource( 37 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 32 )
+anims/death = SubResource( 38 )
 anims/idle = SubResource( 33 )
 anims/walk = SubResource( 34 )
 
