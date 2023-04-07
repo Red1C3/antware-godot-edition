@@ -57,7 +57,6 @@ func _physics_process(delta):
 
 func _process(delta):
 	var pitch=velocity.length()*PITCH_MULTIPLIER
-	print(pitch)
 	if pitch>FOOTSTEPS_THRESHOLD:
 		footsteps_stream.stream_paused=false #TODO adjust pitch
 		footsteps_stream.pitch_scale=pitch
