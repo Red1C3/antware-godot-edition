@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Player/FN57_D.material" type="Material" id=1]
 [ext_resource path="res://Assets/Player/Glove_D.material" type="Material" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Player/Player.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Player/playerFootsteps.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Assets/Player/gunshot.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Player/flash.png" type="Texture" id=8]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Player_Mesh"
@@ -274,6 +275,21 @@ surfaces/0 = {
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.120537, 1.47668, 0.23948, 0.0423165, 0.0445304, 0.273048 ) ],
 "vertex_count": 4275
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Armature/Skeleton/MuzzleAttachment/Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -2260,6 +2276,18 @@ tracks/56/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/57/type = "value"
+tracks/57/path = NodePath("Armature/Skeleton/MuzzleAttachment/Sprite3D:visible")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="CapsuleShape" id=12]
 radius = 0.5
@@ -2580,6 +2608,11 @@ cast_to = Vector3( 0, 0, 1000 )
 transform = Transform( 100, 0, 0, 0, 100, -4.54747e-13, 0, 4.54747e-13, 100, 0, 0, 11.4267 )
 stream = ExtResource( 7 )
 
+[node name="Sprite3D" type="Sprite3D" parent="Armature/Skeleton/MuzzleAttachment"]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 22.8528 )
+visible = false
+texture = ExtResource( 8 )
+
 [node name="Camera" type="Camera" parent="Armature"]
 transform = Transform( -100, 0, -8.74228e-06, 8.74228e-06, 1.36424e-12, -100, 1.35525e-19, -100, -1.36424e-12, 0, 0, 0 )
 
@@ -2587,6 +2620,7 @@ transform = Transform( -100, 0, -8.74228e-06, 8.74228e-06, 1.36424e-12, -100, 1.
 current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
 anims/draw = SubResource( 7 )
 anims/hide = SubResource( 8 )
 anims/idle = SubResource( 9 )
