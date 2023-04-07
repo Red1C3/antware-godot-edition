@@ -10,6 +10,9 @@ const MOUSE_CLAMP_MAX=deg2rad(60)
 const BULLET_DAM=25
 const MAG_SIZE=12
 const MAG_COUNT=4 #TODO level dependant
+const FOOTSTEPS_STREAM_NAME="FootstepsStream"
+const FOOTSTEPS_THRESHOLD=0.001
+const PITCH_MULTIPLIER=0.1
 
 var mouse_sensetivity=0.1 #TODO make it an option
 var anim_player:AnimationPlayer
@@ -24,6 +27,7 @@ var health=STARTING_HEALTH
 var ray:RayCast
 var on_mag_bullets=MAG_SIZE
 var off_mag_bullets=MAG_SIZE*(MAG_COUNT-1)
+var footsteps_stream:AudioStreamPlayer3D
 
 func _ready():
 	set_vars()
@@ -50,6 +54,15 @@ func _physics_process(delta):
 			velocity=velocity*SPRINT_MULTIPLIER # TODO make footsteps faster
 		
 	velocity=move_and_slide(velocity,Vector3.UP)
+
+func _process(delta):
+	var pitch=velocity.length()*PITCH_MULTIPLIER
+	print(pitch)
+	if pitch>FOOTSTEPS_THRESHOLD:
+		footsteps_stream.stream_paused=false #TODO adjust pitch
+		footsteps_stream.pitch_scale=pitch
+	else:
+		footsteps_stream.stream_paused=true
 
 func _input(event):
 	if event.is_action("quit"):
@@ -80,6 +93,9 @@ func set_vars():
 			armature_default_basis=armature.transform.basis
 		if child is CollisionShape:
 			collision_shape=child
+		if child is AudioStreamPlayer3D\
+				 and child.name == FOOTSTEPS_STREAM_NAME:
+			footsteps_stream=child
 			
 	for child in armature.get_child(0).get_children():
 		if child is BoneAttachment:

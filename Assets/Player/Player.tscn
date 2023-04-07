@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Player/FN57_D.material" type="Material" id=1]
 [ext_resource path="res://Assets/Player/Glove_D.material" type="Material" id=2]
 [ext_resource path="res://Assets/Player/bullet_d.material" type="Material" id=3]
 [ext_resource path="res://Assets/Player/Hand_D.material" type="Material" id=4]
 [ext_resource path="res://Assets/Player/Player.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Player/playerFootsteps.ogg" type="AudioStream" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Player_Mesh"
@@ -2268,7 +2269,7 @@ bones/1/name = "Slide_j"
 bones/1/parent = 0
 bones/1/rest = Transform( 1, 0, 0, 0, 1, -3.55271e-15, 0, 3.55271e-15, 1, -0.019412, 10.7522, -0.198247 )
 bones/1/enabled = true
-bones/1/bound_children = [  ]
+bones/1/bound_children = [ NodePath("MuzzleAttachment") ]
 bones/2/name = "mag1_j"
 bones/2/parent = 0
 bones/2/rest = Transform( 1, 0, 0, 0, 1, -3.55271e-15, 0, 3.55271e-15, 1, -0.0178671, -2.68722, 0.214893 )
@@ -2556,7 +2557,7 @@ mesh = SubResource( 6 )
 skin = SubResource( 2 )
 
 [node name="MuzzleAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 0, 0, 0, -9.95264e-21, 1, 0, -1, -9.95264e-21, -9.96318, 39.7183, -149.715 )
+transform = Transform( 1, 0, 0, 0, 3.55271e-15, 1, 0, -1, 3.55271e-15, -9.94859, 27.9641, -149.704 )
 bone_name = "Slide_j"
 
 [node name="RayCast" type="RayCast" parent="Armature/Skeleton/MuzzleAttachment"]
@@ -2564,6 +2565,9 @@ cast_to = Vector3( 0, 0, 1000 )
 
 [node name="Camera" type="Camera" parent="Armature"]
 transform = Transform( -100, 0, -8.74228e-06, 8.74228e-06, 1.36424e-12, -100, 1.35525e-19, -100, -1.36424e-12, 0, 0, 0 )
+
+[node name="Listener" type="Listener" parent="Armature/Camera"]
+current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/draw = SubResource( 7 )
@@ -2575,3 +2579,8 @@ anims/shoot = SubResource( 11 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.899285, 0 )
 shape = SubResource( 12 )
+
+[node name="FootstepsStream" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+stream_paused = true
