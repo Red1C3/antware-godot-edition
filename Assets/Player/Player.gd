@@ -14,6 +14,8 @@ const FOOTSTEPS_STREAM_NAME="FootstepsStream"
 const FOOTSTEPS_THRESHOLD=0.001
 const PITCH_MULTIPLIER=0.1
 const HURT_PANEL_NAME="HurtPanel"
+const YOU_WIN_PROMPT_NAME="YouWinPrompt"
+const YOU_LOSE_PROMPT_NAME="YouLosePrompt"
 
 var mouse_sensetivity=0.1 #TODO make it an option
 var anim_player:AnimationPlayer
@@ -31,6 +33,9 @@ var off_mag_bullets=MAG_SIZE*(MAG_COUNT-1)
 var footsteps_stream:AudioStreamPlayer3D
 var hurt_stream:AudioStreamPlayer3D
 var hurt_panel:Panel
+var you_win_prompt:TextureRect
+var you_lose_prompt:TextureRect
+var has_lost=false
 
 func _ready():
 	set_vars()
@@ -111,6 +116,10 @@ func set_vars():
 	for child in control.get_children():
 		if child is Panel and child.name==HURT_PANEL_NAME:
 			hurt_panel=child
+		if child is TextureRect and child.name==YOU_WIN_PROMPT_NAME:
+			you_win_prompt=child
+		if child is TextureRect and child.name == YOU_LOSE_PROMPT_NAME:
+			you_lose_prompt=child
 			
 
 
@@ -122,7 +131,7 @@ func deal_damage(damage):
 		game_over()
 
 func game_over():
-	pass #TODO
+	has_lost=true
 	
 func shoot():
 	on_mag_bullets-=1
