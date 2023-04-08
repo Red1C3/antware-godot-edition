@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Maps/CPU/model.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Maps/CPU/cpu-shape.tres" type="Shape" id=2]
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Ant/Ant.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Maps/CPU/music01.ogg" type="AudioStream" id=5]
 
 [sub_resource type="NavigationMesh" id=4]
 vertices = PoolVector3Array( -0.132062, 1.28467, -11.6192, -11.6321, 1.03467, -11.6192, -11.6321, 1.28467, -0.119159, -0.132062, 1.28467, 11.6308, 11.6179, 1.03467, 11.6308, 11.6179, 1.28467, -0.119159, -11.6321, 1.28467, -0.119159, -11.6321, 1.03467, 11.6308, -0.132062, 1.28467, 11.6308, 11.6179, 1.28467, -0.119159, 11.6179, 1.03467, -11.6192, -0.132062, 1.28467, -11.6192 )
@@ -46,3 +47,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 7 )
 
 [node name="Ant2" parent="Actors/Ants" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.94215, 1, 7 )
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
