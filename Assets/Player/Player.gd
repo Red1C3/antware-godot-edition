@@ -58,7 +58,7 @@ func _physics_process(delta):
 func _process(delta):
 	var pitch=velocity.length()*PITCH_MULTIPLIER
 	if pitch>FOOTSTEPS_THRESHOLD:
-		footsteps_stream.stream_paused=false #TODO adjust pitch
+		footsteps_stream.stream_paused=false
 		footsteps_stream.pitch_scale=pitch
 	else:
 		footsteps_stream.stream_paused=true
@@ -71,7 +71,7 @@ func _input(event):
 										and not anim_player.is_playing():
 		anim_player.play("shoot")
 	
-	if event.is_action_pressed("reload"):
+	if event.is_action_pressed("reload") and off_mag_bullets>0:
 		anim_player.play("reload")
 		
 	if event is InputEventMouseMotion:
@@ -119,6 +119,5 @@ func shoot():
 		other.deal_damage(BULLET_DAM)
 
 func reload():
-	if off_mag_bullets>0:
-		on_mag_bullets=MAG_SIZE
-		off_mag_bullets-=MAG_SIZE
+	on_mag_bullets=MAG_SIZE
+	off_mag_bullets-=MAG_SIZE
