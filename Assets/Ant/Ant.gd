@@ -27,6 +27,7 @@ var state setget set_state
 var health=100
 var material:SpatialMaterial
 var dam_color_timer:Timer
+var hurt_stream:AudioStreamPlayer3D
 
 func _ready():
 	set_vars()
@@ -81,6 +82,7 @@ func set_vars():
 	for child in armature.get_child(0).get_children():
 		if child.name == BITE_ATTACHMENT_NAME:
 			damage_area=child.get_child(0)
+			hurt_stream=child.get_child(1)
 		if child is MeshInstance and material == null:
 			material=child.get_surface_material(0)
 	player=get_node("/root/Root/Actors/Player")
@@ -133,6 +135,7 @@ func deal_damage(amount):
 	if self.state==State.death:
 		return
 	health-=amount
+	hurt_stream.play()
 	if health<=0:
 		self.state=State.death
 		return
