@@ -13,6 +13,7 @@ const MAG_COUNT=4 #TODO level dependant
 const FOOTSTEPS_STREAM_NAME="FootstepsStream"
 const FOOTSTEPS_THRESHOLD=0.001
 const PITCH_MULTIPLIER=0.1
+const HURT_PANEL_NAME="HurtPanel"
 
 var mouse_sensetivity=0.1 #TODO make it an option
 var anim_player:AnimationPlayer
@@ -29,6 +30,7 @@ var on_mag_bullets=MAG_SIZE
 var off_mag_bullets=MAG_SIZE*(MAG_COUNT-1)
 var footsteps_stream:AudioStreamPlayer3D
 var hurt_stream:AudioStreamPlayer3D
+var hurt_panel:Panel
 
 func _ready():
 	set_vars()
@@ -85,6 +87,7 @@ func _input(event):
 		armature.rotate_object_local(Vector3(1, 0, 0), cam_rot_y)
 		
 func set_vars():
+	var control:Control
 	for child in get_children():
 		if child is AnimationPlayer:
 			anim_player=child
@@ -96,6 +99,8 @@ func set_vars():
 		if child is AudioStreamPlayer3D\
 				 and child.name == FOOTSTEPS_STREAM_NAME:
 			footsteps_stream=child
+		if child is Control:
+			control=child
 			
 	for child in armature.get_child(0).get_children():
 		if child is BoneAttachment:
@@ -103,11 +108,16 @@ func set_vars():
 	for child in armature.get_child(1).get_children():
 		if child is AudioStreamPlayer3D:
 			hurt_stream=child
+	for child in control.get_children():
+		if child is Panel and child.name==HURT_PANEL_NAME:
+			hurt_panel=child
+			
 
 
 func deal_damage(damage):
 	health-=damage
 	hurt_stream.play()
+	hurt_panel.visible=true
 	if health<=0:
 		game_over()
 
@@ -126,3 +136,7 @@ func shoot():
 func reload():
 	on_mag_bullets=MAG_SIZE
 	off_mag_bullets-=MAG_SIZE
+
+
+func _on_HurtStream_finished():
+	hurt_panel.visible=false

@@ -2326,7 +2326,7 @@ bones/1/name = "Slide_j"
 bones/1/parent = 0
 bones/1/rest = Transform( 1, 0, 0, 0, 1, -3.55271e-15, 0, 3.55271e-15, 1, -0.019412, 10.7522, -0.198247 )
 bones/1/enabled = true
-bones/1/bound_children = [ NodePath("MuzzleAttachment") ]
+bones/1/bound_children = [  ]
 bones/2/name = "mag1_j"
 bones/2/parent = 0
 bones/2/rest = Transform( 1, 0, 0, 0, 1, -3.55271e-15, 0, 3.55271e-15, 1, -0.0178671, -2.68722, 0.214893 )
@@ -2696,3 +2696,5 @@ margin_right = 514.0
 margin_bottom = 549.0
 texture = ExtResource( 12 )
 expand = true
+
+[connection signal="finished" from="Armature/Camera/HurtStream" to="." method="_on_HurtStream_finished"]
