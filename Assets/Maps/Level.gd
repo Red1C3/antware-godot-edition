@@ -1,5 +1,7 @@
 extends Spatial
 
+const LEVEL_BOTTOM=-100
+
 var player:KinematicBody
 var ants:Spatial
 
@@ -14,4 +16,6 @@ func _process(_delta):
 	if player.has_lost:
 		player.you_lose_prompt.visible=true
 		get_tree().paused=true
-
+	if player.to_global(Vector3.ZERO).y<LEVEL_BOTTOM:
+		player.you_lose_prompt.visible=true
+		get_tree().paused=true
