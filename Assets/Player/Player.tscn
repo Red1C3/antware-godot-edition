@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Player/FN57_D.material" type="Material" id=1]
 [ext_resource path="res://Assets/Player/Glove_D.material" type="Material" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Player/gunshot.wav" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Player/flash.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Player/reload.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Player/playerHurt.wav" type="AudioStream" id=10]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Player_Mesh"
@@ -1863,7 +1864,7 @@ tracks/55/keys = {
 } ]
 }
 tracks/56/type = "value"
-tracks/56/path = NodePath("ReloadStream:playing")
+tracks/56/path = NodePath("Armature/Skeleton/MuzzleAttachment/ReloadStream:playing")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/imported = false
@@ -2611,7 +2612,7 @@ mesh = SubResource( 6 )
 skin = SubResource( 2 )
 
 [node name="MuzzleAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 0.000327108, 0.000302144, -0.000302144, 2.61195e-13, 1, 0.000327108, -1, 9.88338e-08, -9.95062, 45.7768, -149.685 )
+transform = Transform( 1, 0, 0, 0, -9.95264e-21, 1, 0, -1, -9.95264e-21, -9.96318, 39.7183, -149.715 )
 bone_name = "Slide_j"
 
 [node name="RayCast" type="RayCast" parent="Armature/Skeleton/MuzzleAttachment"]
@@ -2626,11 +2627,18 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 22.8528 )
 visible = false
 texture = ExtResource( 8 )
 
+[node name="ReloadStream" type="AudioStreamPlayer3D" parent="Armature/Skeleton/MuzzleAttachment"]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 10.7912 )
+stream = ExtResource( 9 )
+
 [node name="Camera" type="Camera" parent="Armature"]
 transform = Transform( -100, 0, -8.74228e-06, 8.74228e-06, 1.36424e-12, -100, 1.35525e-19, -100, -1.36424e-12, 0, 0, 0 )
 
 [node name="Listener" type="Listener" parent="Armature/Camera"]
 current = true
+
+[node name="HurtStream" type="AudioStreamPlayer3D" parent="Armature/Camera"]
+stream = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 13 )
@@ -2648,6 +2656,3 @@ shape = SubResource( 12 )
 stream = ExtResource( 6 )
 autoplay = true
 stream_paused = true
-
-[node name="ReloadStream" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 9 )

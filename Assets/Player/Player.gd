@@ -28,6 +28,7 @@ var ray:RayCast
 var on_mag_bullets=MAG_SIZE
 var off_mag_bullets=MAG_SIZE*(MAG_COUNT-1)
 var footsteps_stream:AudioStreamPlayer3D
+var hurt_stream:AudioStreamPlayer3D
 
 func _ready():
 	set_vars()
@@ -99,10 +100,14 @@ func set_vars():
 	for child in armature.get_child(0).get_children():
 		if child is BoneAttachment:
 			ray=child.get_child(0)
+	for child in armature.get_child(1).get_children():
+		if child is AudioStreamPlayer3D:
+			hurt_stream=child
 
 
 func deal_damage(damage):
 	health-=damage
+	hurt_stream.play()
 	if health<=0:
 		game_over()
 
