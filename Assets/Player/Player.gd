@@ -16,6 +16,8 @@ const PITCH_MULTIPLIER=0.1
 const HURT_PANEL_NAME="HurtPanel"
 const YOU_WIN_PROMPT_NAME="YouWinPrompt"
 const YOU_LOSE_PROMPT_NAME="YouLosePrompt"
+const AMMO_BOX_NAME="AmmoBox"
+const HEALTH_BOX_NAME="HealthBox"
 
 var mouse_sensetivity=0.1 #TODO make it an option
 var anim_player:AnimationPlayer
@@ -36,6 +38,8 @@ var hurt_panel:Panel
 var you_win_prompt:TextureRect
 var you_lose_prompt:TextureRect
 var has_lost=false
+var ammo_label:Label
+var health_label:Label
 
 func _ready():
 	set_vars()
@@ -70,6 +74,7 @@ func _process(delta):
 		footsteps_stream.pitch_scale=pitch
 	else:
 		footsteps_stream.stream_paused=true
+	update_ui()
 
 func _input(event):
 	if event.is_action("quit"):
@@ -120,6 +125,10 @@ func set_vars():
 			you_win_prompt=child
 		if child is TextureRect and child.name == YOU_LOSE_PROMPT_NAME:
 			you_lose_prompt=child
+		if child is HBoxContainer and child.name==AMMO_BOX_NAME:
+			ammo_label=child.get_child(1)
+		if child is HBoxContainer and child.name==HEALTH_BOX_NAME:
+			health_label=child.get_child(1)
 			
 
 
@@ -149,3 +158,7 @@ func reload():
 
 func _on_HurtStream_finished():
 	hurt_panel.visible=false
+
+func update_ui():
+	ammo_label.text=str(on_mag_bullets)+"/"+str(off_mag_bullets)
+	health_label.text=str(health)

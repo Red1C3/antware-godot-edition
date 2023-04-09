@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Player/FN57_D.material" type="Material" id=1]
 [ext_resource path="res://Assets/Player/Glove_D.material" type="Material" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Assets/Player/playerHurt.wav" type="AudioStream" id=10]
 [ext_resource path="res://Assets/UI/win.png" type="Texture" id=11]
 [ext_resource path="res://Assets/UI/lose.png" type="Texture" id=12]
+[ext_resource path="res://Assets/UI/ammo.png" type="Texture" id=13]
+[ext_resource path="res://Assets/UI/plus.png" type="Texture" id=14]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Player_Mesh"
@@ -2668,8 +2670,6 @@ visible = false
 modulate = Color( 1, 0, 0, 0.576471 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="YouWinPrompt" type="TextureRect" parent="Control"]
 visible = false
@@ -2679,8 +2679,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -515.0
 margin_top = -480.0
-margin_right = 514.0
-margin_bottom = 549.0
+margin_right = 515.0
+margin_bottom = 480.0
 texture = ExtResource( 11 )
 expand = true
 
@@ -2692,9 +2692,55 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -515.0
 margin_top = -480.0
-margin_right = 514.0
-margin_bottom = 549.0
+margin_right = 515.0
+margin_bottom = 480.0
 texture = ExtResource( 12 )
 expand = true
+
+[node name="AmmoBox" type="HBoxContainer" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -64.0
+margin_right = 153.0
+
+[node name="AmmoTexture" type="TextureRect" parent="Control/AmmoBox"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 13 )
+expand = true
+
+[node name="AmmoLabel" type="Label" parent="Control/AmmoBox"]
+modulate = Color( 0.65098, 0.443137, 0.14902, 1 )
+margin_left = 68.0
+margin_top = 14.0
+margin_right = 153.0
+margin_bottom = 50.0
+text = "20/120"
+valign = 1
+
+[node name="HealthBox" type="HBoxContainer" parent="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -99.0
+margin_top = -36.0
+
+[node name="HealthTexture" type="TextureRect" parent="Control/HealthBox"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="HealthLabel" type="Label" parent="Control/HealthBox"]
+modulate = Color( 0.65098, 0.443137, 0.14902, 1 )
+margin_left = 36.0
+margin_right = 81.0
+margin_bottom = 36.0
+size_flags_vertical = 0
+text = "100"
 
 [connection signal="finished" from="Armature/Camera/HurtStream" to="." method="_on_HurtStream_finished"]

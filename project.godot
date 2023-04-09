@@ -23,9 +23,14 @@ _global_script_class_icons={
 config/name="antware-godot-remake"
 config/icon="res://icon.png"
 
+[global]
+
+font=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/custom_font="res://Assets/UI/dynamicfont.tres"
 
 [input]
 
