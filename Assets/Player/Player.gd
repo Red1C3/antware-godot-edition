@@ -1,5 +1,7 @@
 extends KinematicBody
 
+export var MAG_COUNT:int
+
 const SPEED=10
 const SPRINT_MULTIPLIER=2
 const STARTING_HEALTH=100
@@ -9,7 +11,6 @@ const MOUSE_CLAMP_MIN=deg2rad(-60)
 const MOUSE_CLAMP_MAX=deg2rad(60)
 const BULLET_DAM=25
 const MAG_SIZE=12
-const MAG_COUNT=4 #TODO level dependant
 const FOOTSTEPS_STREAM_NAME="FootstepsStream"
 const FOOTSTEPS_THRESHOLD=0.001
 const PITCH_MULTIPLIER=0.1
@@ -31,7 +32,7 @@ var cam_rot_y=0
 var health=STARTING_HEALTH
 var ray:RayCast
 var on_mag_bullets=MAG_SIZE
-var off_mag_bullets=MAG_SIZE*(MAG_COUNT-1)
+var off_mag_bullets:int
 var footsteps_stream:AudioStreamPlayer3D
 var hurt_stream:AudioStreamPlayer3D
 var hurt_panel:Panel
@@ -45,6 +46,7 @@ func _ready():
 	set_vars()
 	anim_player.play("idle")
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	off_mag_bullets=MAG_SIZE*(MAG_COUNT-1)
 
 func _physics_process(delta):
 	if not is_on_floor():

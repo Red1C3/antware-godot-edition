@@ -2314,6 +2314,7 @@ height = 0.8
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 5 )
+MAG_COUNT = 4
 
 [node name="Armature" type="Spatial" parent="."]
 transform = Transform( 0.01, 0, 0, 0, -4.37114e-10, -0.01, 0, 0.01, -4.37114e-10, 0, 1.4, 0 )
