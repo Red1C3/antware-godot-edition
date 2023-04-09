@@ -2621,7 +2621,7 @@ transform = Transform( 1, 0, 0, 0, 3.55271e-15, 1, 0, -1, 3.55271e-15, -9.94859,
 bone_name = "Slide_j"
 
 [node name="RayCast" type="RayCast" parent="Armature/Skeleton/MuzzleAttachment"]
-cast_to = Vector3( 0, 0, 10000 )
+cast_to = Vector3( 0, 0, 100000 )
 
 [node name="ShotStream" type="AudioStreamPlayer3D" parent="Armature/Skeleton/MuzzleAttachment"]
 transform = Transform( 100, 0, 0, 0, 100, -4.54747e-13, 0, 4.54747e-13, 100, 0, 0, 11.4267 )

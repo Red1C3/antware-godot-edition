@@ -9,8 +9,10 @@
 [ext_resource path="res://Assets/UI/PauseHandler.gd" type="Script" id=7]
 
 [sub_resource type="NavigationMesh" id=4]
-vertices = PoolVector3Array( -0.132062, 1.28467, -11.6192, -11.6321, 1.03467, -11.6192, -11.6321, 1.28467, -0.119159, -0.132062, 1.28467, 11.6308, 11.6179, 1.03467, 11.6308, 11.6179, 1.28467, -0.119159, -11.6321, 1.28467, -0.119159, -11.6321, 1.03467, 11.6308, -0.132062, 1.28467, 11.6308, 11.6179, 1.28467, -0.119159, 11.6179, 1.03467, -11.6192, -0.132062, 1.28467, -11.6192 )
-polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 5 ), PoolIntArray( 2, 5, 3 ), PoolIntArray( 3, 5, 4 ), PoolIntArray( 8, 7, 6 ), PoolIntArray( 11, 10, 9 ) ]
+vertices = PoolVector3Array( -10, 0.949305, -11.5, -11, 0.949305, -10.75, -11.5, 0.949305, -10.25, -11.5, 0.949305, -0.75, -2, 0.949305, -2.25, 0.75, 0.949305, -11.5, -11.5, 0.949305, -0.75, -2.25, 0.949305, -0.5, -2, 0.949305, -2.25, -2, 0.949305, -2.25, 0.5, 0.949305, -2.25, 0.75, 0.949305, -11.5, 0.75, 0.949305, -11.5, 0.5, 0.949305, -2.25, 2.25, 0.949305, -2, 2.25, 0.949305, -2, 2.25, 0.949305, 0.5, 11.5, 0.949305, 0.75, 11.5, 0.949305, -10.25, 10, 0.949305, -11.5, 0.75, 0.949305, -11.5, 2.25, 0.949305, -2, 11.5, 0.949305, 0.75, -1.25, 0.639305, -1.25, -1.25, 0.639305, 1.25, 1.25, 0.639305, 1.25, 1.25, 0.639305, -1.25, -0.75, 0.949305, 11.5, -0.5, 0.949305, 2.25, -2.25, 0.949305, 2, -2.25, 0.949305, 2, -2.25, 0.949305, -0.5, -11.5, 0.949305, -0.75, -11.5, 0.949305, 10.25, -10, 0.949305, 11.5, -0.75, 0.949305, 11.5, -2.25, 0.949305, 2, -11.5, 0.949305, -0.75, 10, 0.949305, 11.5, 11, 0.949305, 10.75, 11.5, 0.949305, 10.25, 11.5, 0.949305, 0.75, 2, 0.949305, 2.25, -0.75, 0.949305, 11.5, 11.5, 0.949305, 0.75, 2.25, 0.949305, 0.5, 2, 0.949305, 2.25, 2, 0.949305, 2.25, -0.5, 0.949305, 2.25, -0.75, 0.949305, 11.5 )
+polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 3, 0, 4 ), PoolIntArray( 4, 0, 5 ), PoolIntArray( 8, 7, 6 ), PoolIntArray( 11, 10, 9 ), PoolIntArray( 14, 13, 12 ), PoolIntArray( 17, 16, 15 ), PoolIntArray( 19, 18, 20 ), PoolIntArray( 20, 18, 21 ), PoolIntArray( 21, 18, 22 ), PoolIntArray( 26, 25, 23 ), PoolIntArray( 23, 25, 24 ), PoolIntArray( 29, 28, 27 ), PoolIntArray( 32, 31, 30 ), PoolIntArray( 34, 33, 35 ), PoolIntArray( 35, 33, 36 ), PoolIntArray( 36, 33, 37 ), PoolIntArray( 39, 38, 40 ), PoolIntArray( 40, 38, 41 ), PoolIntArray( 41, 38, 42 ), PoolIntArray( 42, 38, 43 ), PoolIntArray( 46, 45, 44 ), PoolIntArray( 49, 48, 47 ) ]
+geometry_parsed_geometry_type = 1
+cell_height = 0.01
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -22,16 +24,17 @@ adjustment_enabled = true
 script = ExtResource( 6 )
 
 [node name="Map" type="Spatial" parent="."]
-
-[node name="StaticBody" type="StaticBody" parent="Map"]
-transform = Transform( 12, 0, 0, 0, -5.24537e-07, 12, 0, -12, -5.24537e-07, 0, 0.935775, 0 )
-visible = false
-
-[node name="CollisionShape" type="CollisionShape" parent="Map/StaticBody"]
-shape = ExtResource( 2 )
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -8.40689, 0 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Map"]
 navmesh = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="Map/NavigationMeshInstance"]
+transform = Transform( 12, 0, 0, 0, -5.24537e-07, 12, 0, -12, -5.24537e-07, 0, 0.935775, 0 )
+visible = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Map/NavigationMeshInstance/StaticBody"]
+shape = ExtResource( 2 )
 
 [node name="model" parent="Map/NavigationMeshInstance" instance=ExtResource( 1 )]
 
@@ -41,15 +44,15 @@ environment = SubResource( 1 )
 [node name="Actors" type="Spatial" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
-transform = Transform( 0.85871, 0, 0.512463, 0, 1, 0, -0.512463, 0, 0.85871, 5.95768, 1.62044, -3.6462 )
+transform = Transform( 0.85871, 0, 0.512463, 0, 1, 0, -0.512463, 0, 0.85871, 32.8758, 2.78042, -18.7877 )
 
 [node name="Ants" type="Spatial" parent="Actors"]
 
 [node name="Ant" parent="Actors/Ants" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 7 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5878, 1, 7 )
 
 [node name="Ant2" parent="Actors/Ants" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.94215, 1, 7 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6456, 1, 7 )
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
