@@ -2649,6 +2649,7 @@ stream = ExtResource( 10 )
 [node name="SpotLight" type="SpotLight" parent="Armature/Camera"]
 light_bake_mode = 0
 shadow_enabled = true
+spot_range = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 13 )
