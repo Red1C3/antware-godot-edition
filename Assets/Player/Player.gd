@@ -41,6 +41,8 @@ var you_lose_prompt:TextureRect
 var has_lost=false
 var ammo_label:Label
 var health_label:Label
+var spot_light:SpotLight
+var flash_energy:float
 
 func _ready():
 	set_vars()
@@ -88,6 +90,12 @@ func _input(event):
 	
 	if event.is_action_pressed("reload") and off_mag_bullets>0:
 		anim_player.play("reload")
+	
+	if event.is_action_pressed("flash_toggle"):
+		if spot_light.light_energy==0:
+			spot_light.light_energy=flash_energy
+		else:
+			spot_light.light_energy=0
 		
 	if event is InputEventMouseMotion:
 		var mouse_pos=event.get_relative() * mouse_sensetivity
@@ -120,6 +128,9 @@ func set_vars():
 	for child in armature.get_child(1).get_children():
 		if child is AudioStreamPlayer3D:
 			hurt_stream=child
+		if child is SpotLight:
+			spot_light=child
+			flash_energy=spot_light.light_energy
 	for child in control.get_children():
 		if child is Panel and child.name==HURT_PANEL_NAME:
 			hurt_panel=child
