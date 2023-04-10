@@ -40,7 +40,8 @@ func _process(delta):
 	if self.state==State.idle:
 		if detection_area.overlaps_body(player) and cast_ray_to_player():
 			self.state=State.chase
-	if to_global(Vector3.ZERO).distance_to(player.global_translation)<=TARGET_DIS:
+	if to_global(Vector3.ZERO).distance_to(player.global_translation)<=TARGET_DIS\
+	and cast_ray_to_player():
 		self.state=State.attack
 
 func _physics_process(delta):
