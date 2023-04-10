@@ -3,7 +3,7 @@ class_name Ant
 extends KinematicBody
 enum State{idle,chase,attack,death}
 
-const SPEED=1
+const SPEED=12
 const ANT_SCOPE=deg2rad(60)
 const CHASE_DAM=10
 const ATTACK_DAM=40
@@ -12,7 +12,7 @@ const ARMATURE_NAME="Armature"
 const BITE_ATTACHMENT_NAME="BiteAttachment"
 const ANIM_PLAYER_IDLE_SPEED=1
 const ANIM_PLAYER_ATK_SPEED=1
-const ANIM_PLAYER_WALK_SPEED_FACTOR=1
+const ANIM_PLAYER_WALK_SPEED_FACTOR=0.35
 const ANIM_PLAYER_DEATH_SPEED=1
 const TARGET_DIS=4.7
 const CLASS_NAME="Ant"
