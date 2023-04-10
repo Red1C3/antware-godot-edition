@@ -65,6 +65,7 @@ func _physics_process(delta):
 		if Input.is_action_pressed("player_right"):
 			direction-=armature.transform.basis.x
 		direction=to_global(direction)-transform.origin
+		direction.y=0
 		velocity=direction.normalized()*SPEED
 		if Input.is_action_pressed("run"):
 			velocity=velocity*SPRINT_MULTIPLIER # TODO make footsteps faster
