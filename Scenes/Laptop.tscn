@@ -49,11 +49,21 @@ environment = SubResource( 1 )
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
 transform = Transform( 0.85871, 0, 0.512463, 0, 1, 0, -0.512463, 0, 0.85871, 32.8758, -3.40815, -18.7877 )
+MAG_COUNT = 2
 
 [node name="Ants" type="Spatial" parent="Actors"]
 
 [node name="Ant" parent="Actors/Ants" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.3591, -3.37093, 42.6485 )
+
+[node name="Ant4" parent="Actors/Ants" instance=ExtResource( 4 )]
+transform = Transform( -0.901327, 0, 0.43314, 0, 1, 0, -0.43314, 0, -0.901327, 50.9238, -3.37093, -48.8572 )
+
+[node name="Ant2" parent="Actors/Ants" instance=ExtResource( 4 )]
+transform = Transform( 0.344184, 0, -0.938902, 0, 1, 0, 0.938902, 0, 0.344184, -63.7404, -3.37093, 31.2702 )
+
+[node name="Ant3" parent="Actors/Ants" instance=ExtResource( 4 )]
+transform = Transform( -0.519131, 0, -0.854694, 0, 1, 0, 0.854694, 0, -0.519131, -65.4688, -3.37093, -52.3449 )
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
