@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="antware-godot-remake"
+run/main_scene="res://Scenes/Main Menu.tscn"
 config/icon="res://icon.png"
 
 [display]
